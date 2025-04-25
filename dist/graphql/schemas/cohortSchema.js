@@ -1,4 +1,7 @@
-export const cohortSchema = `#graphql
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cohortSchema = void 0;
+exports.cohortSchema = `#graphql
     type Query {
         cohort: [Cohort]
         CohortById(classId: String!): Cohort

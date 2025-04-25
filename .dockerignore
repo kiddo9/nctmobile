@@ -1,3 +1,5 @@
 node_modules/
 .env
 unused/
+dist/unused
+dist.zip

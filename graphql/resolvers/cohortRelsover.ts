@@ -4,6 +4,7 @@ const {
   getCohortById,
   updateCohort,
   deleteCohort,
+  addStudentToCohort,
 } = require("../controllers/cohortController"); //import class schedule controller
 
 const classScheduleResolver = {
@@ -81,6 +82,20 @@ const classScheduleResolver = {
     },
     deleteCohort: async (_: any, { classId }: any) => {
       return await deleteCohort(classId);
+    },
+
+    addStudentToCohort: async (
+      _: any,
+      { student_id, classId }: any,
+      context: any
+    ) => {
+      const jwtId = context.user;
+
+      if (!jwtId) {
+        throw new Error("unauthorized");
+      }
+
+      return await addStudentToCohort(student_id, classId, jwtId);
     },
   },
 };

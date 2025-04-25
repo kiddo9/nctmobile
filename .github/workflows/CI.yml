@@ -1,0 +1,38 @@
+name: NCTMOBILE CI
+
+on:
+  push:
+    branches:
+      - main
+      - secondB
+
+  pull_request:
+    branches:
+      - main
+      - secondB
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "windows-latest", "macOs-latest"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: install dependenices
+        run: npm install
+
+      - name: build application
+        run: npm run build
+
+      - name: deploy application
+        run: |
+          echo "deploying application"

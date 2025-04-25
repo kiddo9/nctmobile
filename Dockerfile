@@ -1,13 +1,19 @@
-FROM node:18-alpine3.17
+# from node offical image build application
+FROM node:18
 
-WORKDIR ./app
+#set up work directory
+WORKDIR /app
 
-COPY package*.json .
+#copy the package json
+COPY package*.json ./
 
+#install its dependencies
 RUN npm install
 
-COPY ./dist .
+# copy app from the dist foldr to the dist folder
+COPY dist ./dist
 
-EXPOSE 8000
+# expose the port
+EXPOSE 4000
 
-CMD [ "node", "app.js" ]
+CMD ["node", "dist/index.js"]
