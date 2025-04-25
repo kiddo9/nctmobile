@@ -302,7 +302,7 @@ const addStudentToCohortConfirm = (req, res) => __awaiter(void 0, void 0, void 0
     const findCohort = yield cohortModel.findOne({ where: { classId: classId } });
     let Cohort = [];
     try {
-        Cohort = Array.isArray(JSON.parse(findCohort.cohort))
+        Cohort = Array.isArray(findCohort.cohort)
             ? JSON.parse(findCohort.cohort)
             : [];
     }

@@ -29,7 +29,7 @@ function startServer() {
             credential: true,
             methods: ["POST", "GET"],
         }));
-        app.use(bodyParse());
+        app.use(bodyParse.json());
         app.use(express.json());
         app.use(bodyParse.json());
         app.use(express.urlencoded({ extended: true }));
