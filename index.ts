@@ -19,12 +19,11 @@ async function startServer() {
   const app = express();
   app.use(
     cors({
-      origin: ["*"],
+      origin: "*",
       credential: true,
       methods: ["POST", "GET"],
     })
   );
-  app.use(bodyParse.json());
   app.use(express.json());
   app.use(bodyParse.json());
   app.use(express.urlencoded({ extended: true }));
@@ -34,13 +33,14 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: process.env.NODE_ENV !== "production",
   });
 
-  //sgtart server
+  //start server
   await server.start();
 
   app.use(
-    "/graphql",
+    "/notify",
     expressMiddleware(server, {
       context: async ({ req }: any) => {
         const authHeader = req.headers.authorization || ""; //req and store auth token
@@ -54,7 +54,6 @@ async function startServer() {
         try {
           //verify user auth token
           const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-          console.log(decode);
 
           //return decoded info
           return { user: decode };
@@ -68,7 +67,7 @@ async function startServer() {
   app.get("/", addStudentToCohortConfirm);
 
   app.listen(process.env.PORT, () => {
-    console.log(`running on http://localhost:${process.env.PORT}/graphql`);
+    console.log(`server is running`);
   });
 }
 
