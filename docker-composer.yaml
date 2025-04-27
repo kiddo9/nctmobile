@@ -1,6 +1,22 @@
-version: 3
+"version": "3"
 services:
   postgres:
     image: postgres
-    container_name: posgresDB
+    container_name: postgresDB
     restart: always
+    environment:
+      - POSTGRES_PASSWORD=value
+    ports:
+      - "5432:5432"
+
+  pgAdmin4:
+    image: dpage/pgadmin4
+    container_name: postgresAdmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=value
+      - PGADMIN_DEFAULT_PASSWORD=value
+    ports:
+      - "8000:80"
+    depends_on:
+      - postgres

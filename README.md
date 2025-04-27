@@ -1,20 +1,5 @@
 # NEO CLOUD SCHOOL PORTAL BACKEND SERVER
 
-## DEPLOYMENT
-
-**Step 1: Compile TS to JS**
-Open the terminal and run
-
-> tsc
-
-this compiles our TS source code into JS and stores it in the 📁 dist folder
-
-**Step 2: Push To Github**
-Push latest source code to Github where we can then connect to the repository from any server of our choice
-
-**Step 3: Execute 📁 dist folder on any Server**
-Execute the Dockerfile on any server that supports docker containers and the Dockerfile should spin up a container moving all our JS code in 📁 dist folder into that container and then executing the JS code to spin up our graphql on that server.
-
 ## DESCRIPTION
 
 This is a module or part of neo clouds backend service for the nctmobile. This module is incharge of sending emails to instructors for permission granting, creation of Cohorts for students and showing there training days and real time in app notification.
@@ -52,13 +37,13 @@ Ensure you have the following installed
 - **clone repo**
 
 ```sh
- git clone https://github.com/kiddo9/HNG-PROJECT-2-GO-backend-stage-1.git
+ git clone https://github.com/kiddo9/nctmobile.git
 ```
 
 - **Navigate to the project directory**
 
 ```sh
-  cd HNG-PROJECT-2-GO-backend-stage-1
+  cd nctmobile
 ```
 
 - **Install Dependecies**
@@ -201,4 +186,99 @@ variables:
   "location": "",
   "trainingDays": ["wednesday"]
 }
+```
+
+- **Mutation to delete cohort**
+
+```sh
+mutation deleteCohort($classId: String!){
+  deleteCohort(classId: $classId){
+    message
+  }
+}
+```
+
+variable
+
+```sh
+{
+  clasId: ""
+}
+```
+
+#### Note:
+
+when using postman all good response has a status of 200 or 201. when making any request don't forget to attach the token to the request.
+
+## DEPLOYMENT
+
+**Step 1: Compile TS to JS**
+Open the terminal and run
+
+```sh
+ tsc
+```
+
+or
+
+```sh
+npm run build
+```
+
+this compiles our TS source code into JS and stores it in the 📁 dist folder
+
+**Step 2: Push To Github**
+Push latest source code to Github where we can then connect to the repository from any server of our choice
+
+**Step 3: Execute 📁 dist folder on any Server**
+Execute the Dockerfile on any server that supports docker containers and the Dockerfile should spin up a container moving all our JS code in 📁 dist folder into that container and then executing the JS code to spin up our graphql on that server.
+
+### Folder structure
+
+```sh
+NEO CLOUD SCHOOL PORTAL BACKEND SERVER/
+|-- .github/
+|     |-- workflows/
+|          |-- CD.yml
+|          |-- CI.yml
+|-- config/
+|    |-- config.json
+|    |-- DB_connection.ts
+|-- emails/
+|    |-- emailConfig.ts
+|-- graphql/
+|     |-- controllers /
+|     |      |-- cohortController.ts
+|     |-- resolvers/
+|     |      |-- cohortResolver.ts
+|     |      |-- index.ts
+|     |      |-- Users.ts
+|     |-- schemas/
+|           |-- cohortSchema.ts
+|           |-- index.ts
+|           |-- UserSchema.ts
+|-- migrations/
+|     |-- cohot_table.js
+|-- models /
+|     |-- cohort.ts
+|     |-- index.js
+|-- notification/
+|     |-- notificationConfig.ts
+|-- seeders/
+|-- .dockerignore
+|-- .env
+|-- .gitignore
+|-- docker-composer.yaml
+|-- Dockerfile
+|-- index.ts
+|-- nodemon.json
+|-- package-lock.json
+|-- package.json
+│── README.md
+│── Tasks.txt
+│── tsconfig.json
+```
+
+```sh
+https://techneo.ng
 ```
