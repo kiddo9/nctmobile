@@ -1,3 +1,5 @@
+import { json } from "stream/consumers";
+
 //import or require model
 const cohortModel = require("../../models/cohort");
 const axios = require("axios"); //import axios
@@ -52,11 +54,11 @@ export const createCohort = async (
   const createCohort = await cohortModel.create({
     course_id,
     instructor_id,
-    cohort,
+    cohort: JSON.stringify(cohort), //convert to json string
     start_date,
     end_date,
     class_time,
-    training_days,
+    training_days: JSON.stringify(training_days), //convert to json string
     cohort_capacity,
     venue,
     location,
@@ -156,11 +158,11 @@ export const updateCohort = async (
     {
       course_id,
       instructor_id,
-      cohort,
+      cohort: JSON.stringify(cohort), //convert to json string
       start_date,
       end_date,
       class_time,
-      training_days,
+      training_days: JSON.stringify(training_days), //convert to json string
       cohort_capacity,
       venue,
       location,

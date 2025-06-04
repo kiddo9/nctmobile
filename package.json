@@ -27,6 +27,7 @@
     "graphql-shield": "^7.6.5",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.3",
+    "mysql2": "^3.14.1",
     "nodemailer": "^6.10.1",
     "nodemon": "^3.1.9",
     "pg": "^8.14.1",

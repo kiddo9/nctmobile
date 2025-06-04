@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
-const pg = require("pg");
+//const pg = require("pg");
+const mysql = require("mysql2");
 
 const connection = new Sequelize(
   process.env.DB_NAME,
@@ -8,8 +9,8 @@ const connection = new Sequelize(
   {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: "postgres",
-    dialectModule: pg,
+    dialect: "mysql",
+    dialectModule: mysql,
   }
 );
 

@@ -56,11 +56,11 @@ const createCohort = (course_id, instructor_id, cohort, start_date, end_date, cl
     const createCohort = yield cohortModel.create({
         course_id,
         instructor_id,
-        cohort,
+        cohort: JSON.stringify(cohort), //convert to json string
         start_date,
         end_date,
         class_time,
-        training_days,
+        training_days: JSON.stringify(training_days), //convert to json string
         cohort_capacity,
         venue,
         location,
@@ -145,11 +145,11 @@ const updateCohort = (course_id, instructor_id, cohort, start_date, end_date, cl
     const updateCohort = yield cohortModel.update({
         course_id,
         instructor_id,
-        cohort,
+        cohort: JSON.stringify(cohort), //convert to json string
         start_date,
         end_date,
         class_time,
-        training_days,
+        training_days: JSON.stringify(training_days), //convert to json string
         cohort_capacity,
         venue,
         location,

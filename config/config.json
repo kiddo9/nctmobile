@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "nctmobile",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "admin",
+    "password": "6UkusbB75uY1uw3DPZjb",
+    "database": "neolms",
+    "host": "database-lms.cczko48uwm8q.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

@@ -42,25 +42,23 @@ async function startServer() {
   app.use(
     "/notify",
     expressMiddleware(server, {
-      context: async ({ req }: any) => {
-        const authHeader = req.headers.authorization || ""; //req and store auth token
-        const token = authHeader.replace("Bearer ", ""); //remove thr Bearer to get token it self
-
-        //check if token is empty and return error message if its true
-        if (!token) {
-          throw new Error("access forbidden");
-        }
-        //using try catch block
-        try {
-          //verify user auth token
-          const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-          //return decoded info
-          return { user: decode };
-        } catch (error) {
-          throw new Error("unauthorized: access denied, token invalid");
-        }
-      },
+      // context: async ({ req }: any) => {
+      //   const authHeader = req.headers.authorization || ""; //req and store auth token
+      //   const token = authHeader.replace("Bearer ", ""); //remove thr Bearer to get token it self
+      //   //check if token is empty and return error message if its true
+      //   if (!token) {
+      //     throw new Error("access forbidden");
+      //   }
+      //   //using try catch block
+      //   try {
+      //     //verify user auth token
+      //     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      //     //return decoded info
+      //     return { user: decode };
+      //   } catch (error) {
+      //     throw new Error("unauthorized: access denied, token invalid");
+      //   }
+      // },
     })
   );
 

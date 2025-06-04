@@ -29,7 +29,7 @@ module.exports = {
         allowNull: false,
       },
       cohort: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       class_time: {
@@ -49,11 +49,7 @@ module.exports = {
         allowNull: false,
       },
       training_days: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
-        allowNull: false,
-      },
-      location: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       venue: {

@@ -27,11 +27,11 @@ const cohortModels = dbconnection.define("cohort", {
         allowNull: false,
     },
     training_days: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     cohort: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     cohort_capacity: {

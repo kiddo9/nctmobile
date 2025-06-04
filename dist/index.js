@@ -42,24 +42,23 @@ function startServer() {
         //start server
         yield server.start();
         app.use("/notify", expressMiddleware(server, {
-            context: (_a) => __awaiter(this, [_a], void 0, function* ({ req }) {
-                const authHeader = req.headers.authorization || ""; //req and store auth token
-                const token = authHeader.replace("Bearer ", ""); //remove thr Bearer to get token it self
-                //check if token is empty and return error message if its true
-                if (!token) {
-                    throw new Error("access forbidden");
-                }
-                //using try catch block
-                try {
-                    //verify user auth token
-                    const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-                    //return decoded info
-                    return { user: decode };
-                }
-                catch (error) {
-                    throw new Error("unauthorized: access denied, token invalid");
-                }
-            }),
+        // context: async ({ req }: any) => {
+        //   const authHeader = req.headers.authorization || ""; //req and store auth token
+        //   const token = authHeader.replace("Bearer ", ""); //remove thr Bearer to get token it self
+        //   //check if token is empty and return error message if its true
+        //   if (!token) {
+        //     throw new Error("access forbidden");
+        //   }
+        //   //using try catch block
+        //   try {
+        //     //verify user auth token
+        //     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        //     //return decoded info
+        //     return { user: decode };
+        //   } catch (error) {
+        //     throw new Error("unauthorized: access denied, token invalid");
+        //   }
+        // },
         }));
         app.get("/", addStudentToCohortConfirm);
         app.listen(process.env.PORT, () => {
@@ -71,3 +70,24 @@ function startServer() {
 startServer().catch((error) => {
     console.log("error occured", error);
 });
+// async function jt() {
+//   const value = {
+//     username: "NCT/DS/24/0528",
+//     password: "@#1NTSTabc123",
+//   };
+//   const response = await axios.post(`${process.env.TESTAPI}`, value);
+//   const data = response.data;
+//   console.log(response);
+//   const token = await jwt.sign(
+//     {
+//       access_id: data.access_id,
+//       student_id: data.student_id,
+//       course_id: data.course_id,
+//       class_id: data.class_id,
+//     },
+//     process.env.JWT_SECRET_KEY,
+//     { expiresIn: "3d" }
+//   );
+//   console.log(token);
+// }
+// jt();
