@@ -1,38 +1,44 @@
 name: NCTMOBILE CD
 
 on:
-  push:
-    branches:
-      - main
-      - secondB
-
-  pull_request:
-    branches:
-      - main
-      - secondB
-
+  workflow_run:
+    workflows: ["NCTMOBILE CI"]
+    types:
+      - completed
 jobs:
   deploy:
-    runs-on: ${{matrix.os}}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
-        os: ["ubuntu-latest", "windows-latest", "macOs-latest"]
+        os: ["ubuntu-latest"]
+    runs-on: ${{matrix.os}}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: set up code
-        uses: actions/setup-node@v2
+      - name: Extract Docker image metadata
+        id: meta
+        uses: docker/metadata-action@v4
         with:
-          node-version: 22
+          images: ${{ vars.DOCKER_USERNAME}}/${{ vars.DOCKER_REPOSITORY }}:${{ vars.DOCKER_TAG }}
 
-      - name: install dependenices
-        run: npm install
+      - name: Login to docker hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build application
-        run: npm run build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Deploy a;plication
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          sbom: true
+
+      - name: Push successful
         run: |
-          echo "Deployment completed"
+          echo "image pushed successfully"

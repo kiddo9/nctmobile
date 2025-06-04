@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - main
-      - secondB
 
   pull_request:
     branches:
       - main
-      - secondB
 
 jobs:
   build:

@@ -75,3 +75,28 @@ async function startServer() {
 startServer().catch((error) => {
   console.log("error occured", error);
 });
+
+// async function jt() {
+//   const value = {
+//     username: "NCT/DS/24/0528",
+//     password: "@#1NTSTabc123",
+//   };
+//   const response = await axios.post(`${process.env.TESTAPI}`, value);
+//   const data = response.data;
+//   console.log(response);
+
+//   const token = await jwt.sign(
+//     {
+//       access_id: data.access_id,
+//       student_id: data.student_id,
+//       course_id: data.course_id,
+//       class_id: data.class_id,
+//     },
+//     process.env.JWT_SECRET_KEY,
+//     { expiresIn: "3d" }
+//   );
+
+//   console.log(token);
+// }
+
+// jt();
